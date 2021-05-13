@@ -1,0 +1,24 @@
+- hosts: 10.128.0.12
+  sudo: yes
+  
+  tasks:
+    - name: APACHE
+      apt: name=apache2 state=latest
+      
+    - name: rootdoc
+      file:
+        path: "/var/www/html"
+        state: directory
+        owner: "josemvg14"
+        mode: '0755'
+
+    - name: PHP
+      apt: name=php update_cache=yes state=latest
+
+- hosts: 10.128.0.13
+  sudo: yes
+  tasks:
+    - name: MYSQL
+      apt: name=mysql-server update_cache=yes state=latest
+   
+   
